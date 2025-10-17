@@ -28,13 +28,6 @@ public class PasswordHasher {
         return salt + hash;
     }
 
-//    public static String hashPasswordWithSalt(String password) throws Exception {
-//        String salt = generateSalt();
-//        String saltedPassword = salt + password;
-//        String hash = hashPassword(saltedPassword);
-//        return salt + hash;
-//    }
-
     public static String generateSalt() {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[SALT_LENGTH];
@@ -55,13 +48,6 @@ public class PasswordHasher {
         return hexString.toString();
     }
 
-//    private static String hashForCheck (String storedHash){
-//        StringBuilder sb = new StringBuilder(storedHash);
-//        sb.delete(0, SALT_LENGTH);
-//        return sb.toString();
-//    }
-
-
     public static boolean checkPassword(String password, String storedHash) throws Exception {
         if (password == null || password.trim().isEmpty()) {
             throw new IllegalArgumentException("Password can't be null or empty");
@@ -70,7 +56,6 @@ public class PasswordHasher {
             throw new IllegalArgumentException("Hash is incorrect");
         }
         String salt = storedHash.substring(0, SALT_LENGTH * 2);
-//        String saltedPassword = salt + password;
         String hashedPassword = hashPassword(salt + password);
         String hashedPasswordWithSalt = salt + hashedPassword;
 
@@ -78,37 +63,5 @@ public class PasswordHasher {
     }
 }
 
-
-//        if (!hashedPassword.equals(storedHash)) {
-////            throw new Exception("Password does not match stored hash");
-//            System.out.println("Password does not match stored hash");
-//        } else {
-//            System.out.println("Password verified");
-//        }
-//        return false;
-
-
-//    public static void checkPasswordWithoutSalt(String password, String storedHash) throws Exception {
-//        String hashedPassword = hashPassword(password);
-//        if (!(hashedPassword.equals(storedHash))) {
-//            throw new Exception("Password does not match stored hash");
-//        } else {
-//            System.out.println("Password verified");
-//        }
-//    }
-//}
-
-
-
-
-//    public String getSalt(){
-//        return generateSalt();
-//    }
-//    public String getHashedPassword(String data) throws Exception {
-//        return hashPassword(data);
-//    }
-//    public String getHashedPasswordWithSalt(String data) throws Exception {
-//        return hashPassword(data);
-//    }
 
 
